@@ -1,6 +1,8 @@
 import logo from './logo.svg';
 import './App.css';
 import Routes from './routes/Router'
+import history from './state/history'
+
 
 function App() {
 
@@ -12,14 +14,12 @@ function App() {
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
-        <a
+        <button
           className="App-link"
-          href="/tic-tac-toe"
-          target="_blank"
-          rel="noopener noreferrer"
+          onClick={() => history.push('tic-tac-toe')}
         >
           Learn React
-        </a>
+        </button>
       </header>
     </div>
   );
