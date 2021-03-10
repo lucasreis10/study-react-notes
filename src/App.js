@@ -1,9 +1,12 @@
 import logo from './logo.svg';
 import './App.css';
+import Routes from './routes/Router'
 
 function App() {
+
   return (
     <div className="App">
+      <Routes />
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
@@ -11,7 +14,7 @@ function App() {
         </p>
         <a
           className="App-link"
-          href="https://reactjs.org"
+          href="/tic-tac-toe"
           target="_blank"
           rel="noopener noreferrer"
         >
