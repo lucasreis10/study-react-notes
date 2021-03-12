@@ -4,10 +4,16 @@ const BoardStyles = () => ({
         textAlign: 'center',
     },
 
-    alignTable: {
+    container: {
         display: 'flex',
-        alignItems: 'baseline',
-        flexDirection: 'column'
+        alignItems: 'center',
+        flexDirection: 'column',
+    },
+
+    piece: {
+        backgroundColor: '#dcdcdc',
+        width: '75px',
+        height: '75px',
     }
 
 })
