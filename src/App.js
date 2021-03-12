@@ -1,5 +1,6 @@
 import './App.css';
 import Routes from './routes/Router'
+import './fonts.css';
 
 
 function App() {

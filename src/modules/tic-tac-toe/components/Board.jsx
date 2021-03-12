@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import BoardStyles from './BoardStyles';
 import { makeStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+import Grid from '@material-ui/core/Grid';
+
 
 const useStyle = makeStyles(BoardStyles, { name: 'Board' })
 
@@ -81,7 +84,9 @@ const Board = (prop) => {
                         ${(history.length === 10 && !winnerPosition.includes(index) && winnerPosition.length === 0)  ? classes.draw : ''} 
                         ${winnerPosition.includes(index) ? classes.winner : ''}`}
         >
-            { board[index] }
+            <span className={classes.fontPiece}>
+                { board[index] }
+            </span>
         </div>
     )
     return (
@@ -105,9 +110,11 @@ const Board = (prop) => {
                     </tr>
                 </tbody>
             </table>
-            <button onClick={revert}>
-                Revert
-            </button>
+            <div>
+                <Button onClick={revert} variant="contained" variant="outlined">
+                    Revert
+                </Button>
+            </div>
         </div>
     )
 

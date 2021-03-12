@@ -15,14 +15,23 @@ const BoardStyles = () => ({
         backgroundColor: '#dcdcdc',
         width: '75px',
         height: '75px',
+
+        clipPath: 'polygon(6% 0, 95% 0, 100% 11%, 100% 93%, 94% 100%, 6% 100%, 0 89%, 0 9%)'
     },
 
     winner: {
-        backgroundColor: 'green',
+        backgroundColor: `#00E676`,
     },
 
     draw: {
-        backgroundColor: 'yellow',
+        backgroundColor: '#FFC400',
+    },
+
+    fontPiece: {
+        fontFamily: ['Stick', 'sans-serif'],
+        fontSize: '50px',
+        color: '#424242',
+        align: 'center',
     }
 
 })
