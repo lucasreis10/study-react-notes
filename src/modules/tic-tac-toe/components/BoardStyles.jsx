@@ -1,3 +1,4 @@
+
 const BoardStyles = () => ({
 
     first:{
@@ -14,6 +15,14 @@ const BoardStyles = () => ({
         backgroundColor: '#dcdcdc',
         width: '75px',
         height: '75px',
+    },
+
+    winner: {
+        backgroundColor: 'green',
+    },
+
+    draw: {
+        backgroundColor: 'yellow',
     }
 
 })

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import BoardStyles from './BoardStyles';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -6,19 +6,54 @@ const useStyle = makeStyles(BoardStyles, { name: 'Board' })
 
 const Board = (prop) => {
     const classes = useStyle()
-
+    
     const [board, setBoard] = useState(new Array(9).fill());
     const [history, setHistory] = useState([board]);
+    const [player, setPlayer] = useState('X');
+    const [winnerPosition, setWinnerPosition] = useState([]);
+
+    
+    const hasWinner = (boardState) => {
+        const winners = [
+            [0, 1, 2],
+            [3, 4, 5],
+            [6, 7, 8],
+            [0, 3, 6],
+            [1, 4, 7],
+            [2, 5, 8],
+            [0, 4, 8],
+            [2, 4, 6]
+        ];
+        
+        const winner = winners
+            .map((winnerPosition) => (boardState[winnerPosition[0]] && boardState[winnerPosition[0]] === boardState[winnerPosition[1]] && 
+                                      boardState[winnerPosition[0]] === boardState[winnerPosition[2]]) 
+                                      ? winnerPosition : null)
+            .filter((result) => result)
+            .flat();
+
+        setWinnerPosition(winner);
+        prop.onWinnerChange(winner.length ? boardState[winner[0]] : null);
+    }
+
+    const changePlayer = () => {
+        setPlayer(player === 'X' ? 'O' : 'X');
+    }
+
+    useEffect(() => {
+        prop.onPlayerChange(player); 
+    }, [player]);
 
     const play = (index) => {
-        if(!board[index]) {
-            prop.onClick();
+        if(!board[index] && winnerPosition.length === 0) {
+            changePlayer();
             const nextBoard = [ ...board ];
             const newHistory = [ ...history ];
     
-            nextBoard[index] = prop.player;
+            nextBoard[index] = player;
             newHistory.push(nextBoard);
-    
+            
+            hasWinner(nextBoard);
             setHistory(newHistory);
             setBoard(nextBoard);
         }
@@ -33,18 +68,22 @@ const Board = (prop) => {
 
             setHistory(lastHistory);
             setBoard(lastBoard);
+            hasWinner(lastBoard);
+            changePlayer();
         }
         
     }
 
-
     const piece = (index) => (
-        <div onClick={() => play(index)} className={classes.piece}>
+        <div 
+            onClick={() => play(index)} 
+            className={`${classes.piece} 
+                        ${(history.length === 10 && !winnerPosition.includes(index) && winnerPosition.length === 0)  ? classes.draw : ''} 
+                        ${winnerPosition.includes(index) ? classes.winner : ''}`}
+        >
             { board[index] }
-                
         </div>
     )
-
     return (
         <div className={classes.container}>
             <table >

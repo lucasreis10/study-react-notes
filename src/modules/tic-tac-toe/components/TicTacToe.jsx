@@ -6,20 +6,24 @@ import Board from './Board';
 const useStyle = makeStyles(TicTacToeStyle, { name: 'TicTacToe' })
 
 const TicTacToe = () => {
-    const classes = useStyle()
     const [player, setPlayer] = useState('X');
+    const [winner, setWinner] = useState();
+    const classes = useStyle()
     
-
-    const changePlayer = () => {
-        setPlayer(player === 'X' ? 'O' : 'X');
+    const changePlayer = (newPlayer) => {
+        setPlayer(newPlayer);
+    }
+    
+    const changeWinner = (newWinner) => {
+        setWinner(newWinner);
     }
 
     return (
         <div className={classes.first} >
             <h1>Tic-Tac-Toe</h1>
-            <h3>It's {player} turn</h3>
+            { winner ? <h3>{winner} Wins </h3> : <h3>It's {player} turn</h3>}
             <div>
-                <Board player={player} onClick={changePlayer} />
+            <Board onPlayerChange={changePlayer} onWinnerChange={changeWinner} />
             </div>
         </div>
     )
