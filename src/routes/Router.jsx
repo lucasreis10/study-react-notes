@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Router } from 'react-router';
 
-import TicTacToe from '../tic-tac-toe/TicTacToe';
+import TicTacToe from '../modules/tic-tac-toe/components/TicTacToe';
 import history  from '../state/history'
 
 
