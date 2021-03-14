@@ -11,6 +11,10 @@ const BoardStyles = () => ({
         flexDirection: 'column',
     },
 
+    btnContainer: {
+        marginTop: '10px',
+    },
+
     piece: {
         backgroundColor: '#dcdcdc',
         width: '75px',
@@ -32,6 +36,10 @@ const BoardStyles = () => ({
         fontSize: '50px',
         color: '#424242',
         align: 'center',
+    },
+
+    fontBtn: {
+        fontFamily: ['Stick', 'sans-serif'],
     }
 
 })

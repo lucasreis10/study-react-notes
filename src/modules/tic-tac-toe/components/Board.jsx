@@ -2,18 +2,21 @@ import React, { useEffect, useState } from 'react';
 import BoardStyles from './BoardStyles';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import Grid from '@material-ui/core/Grid';
+import { ButtonGroup, Container } from '@material-ui/core';
 
 
 const useStyle = makeStyles(BoardStyles, { name: 'Board' })
 
 const Board = (prop) => {
     const classes = useStyle()
+    const INITIAL_BOARD_STATE = new Array(9).fill();
+    const INITIAL_PLAYER_STATE = 'X';
+    const INITIAL_WINNER_POSSITION_STATE = [];
     
-    const [board, setBoard] = useState(new Array(9).fill());
+    const [board, setBoard] = useState(INITIAL_BOARD_STATE);
     const [history, setHistory] = useState([board]);
-    const [player, setPlayer] = useState('X');
-    const [winnerPosition, setWinnerPosition] = useState([]);
+    const [player, setPlayer] = useState(INITIAL_PLAYER_STATE);
+    const [winnerPosition, setWinnerPosition] = useState(INITIAL_WINNER_POSSITION_STATE);
 
     
     const hasWinner = (boardState) => {
@@ -77,6 +80,13 @@ const Board = (prop) => {
         
     }
 
+    const reset = () => {
+        setBoard(INITIAL_BOARD_STATE);
+        setHistory([INITIAL_BOARD_STATE]);
+        setPlayer(INITIAL_PLAYER_STATE);
+        setWinnerPosition(INITIAL_WINNER_POSSITION_STATE);
+    }
+
     const piece = (index) => (
         <div 
             onClick={() => play(index)} 
@@ -111,9 +121,18 @@ const Board = (prop) => {
                 </tbody>
             </table>
             <div>
-                <Button onClick={revert} variant="contained" variant="outlined">
-                    Revert
+            <div className={classes.btnContainer}>
+                <Button onClick={revert} color="primary" variant="contained" variant="outlined">
+                    <span className={classes.fontBtn}>
+                        Revert
+                    </span>
                 </Button>
+                <Button onClick={reset} color="secondary" variant="contained" variant="outlined">
+                    <span className={classes.fontBtn}>
+                        Reset
+                    </span>
+                </Button>
+            </div>
             </div>
         </div>
     )
