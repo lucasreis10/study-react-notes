@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import DisplayPokemon from './DisplayPokemon';
+
 
 const fetchPokemonBy = async (name) => {
     try {
@@ -9,7 +11,6 @@ const fetchPokemonBy = async (name) => {
     }
     
 } 
-
 
 const FetchPokemon = () => {
 
@@ -26,12 +27,6 @@ const FetchPokemon = () => {
         setPokemonsName(param.target.value);
     };
 
-    const getImage = () => {
-        debugger;
-        // pokemon.sprites.front_default
-        return pokemon && pokemon.sprites ? pokemon.sprites.front_default : '';
-    }
-
     return (
         <div>
             <h1>Fetch Pokemon</h1>
@@ -43,22 +38,11 @@ const FetchPokemon = () => {
                 onChange={handleChange}
             />
             <button onClick={fetch}>Fetch</button>
-            
-            <div style={{
-                    marginTop: '15vh', 
-                    marginLeft: '30vw',
-                    borderStyle: 'dotted',
-                    width: '50vw', 
-                    height: '40vh',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    }}>
-                <img 
-                    src={pokemon && pokemon.sprites ? pokemon.sprites.front_default : ''}
-                    alt="Pokemon's image"
-                />
-                <h3>{pokemon.name}</h3>
-            </div>
+        
+            <DisplayPokemon 
+                img={pokemon && pokemon.sprites ? pokemon.sprites.front_default : ''}
+                pokemonName={pokemon.name}
+            />
 
         </div>
     );

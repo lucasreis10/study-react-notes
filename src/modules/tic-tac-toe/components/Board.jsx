@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import BoardStyles from './BoardStyles';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import { ButtonGroup, Container } from '@material-ui/core';
 
 
 const useStyle = makeStyles(BoardStyles, { name: 'Board' })
