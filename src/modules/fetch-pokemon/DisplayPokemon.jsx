@@ -6,6 +6,7 @@ const useStyle = makeStyles(DisplayPokemonStyles, { name: 'DisplayPokemon' })
 const DisplayPokemon = (prop) => {
 
     const classes = useStyle();
+    
 
     return (
         <div className={classes.divDisplay}>
