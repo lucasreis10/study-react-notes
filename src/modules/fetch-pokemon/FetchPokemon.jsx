@@ -3,6 +3,8 @@ import axios from 'axios';
 import DisplayPokemon from './DisplayPokemon';
 import DisplayLoading from './DisplayLoading';
 import DisplayError from './DisplayError';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
 
 
 const fetchPokemonBy = async (name) => {
@@ -27,12 +29,17 @@ const FetchPokemon = () => {
         }, 700);
     }, [pokemon]);
 
+    const handleKeyDown = (event) => {
+        if(event.key === 'Enter') {
+            fetch();
+        }
+    }
+
     const fetch = async () => {
         try {
             resetStates();
             setComponenteDisplay(<DisplayLoading />);
             const { data: pokemon } = await fetchPokemonBy(pokemonsName);
-            console.log('teste', pokemon);
             setPokemon(pokemon);
         } catch(error) {
             setComponenteDisplay(<DisplayError />);
@@ -52,13 +59,18 @@ const FetchPokemon = () => {
         <div>
             <h1>Fetch Pokemon</h1>
             
-            <input 
-                type="text" 
-                placeholder="Pokemon's name" 
+            <TextField label="Fetch pokemon"
                 value={pokemonsName}
-                onChange={handleChange}
+                onChange={handleChange} 
+                onKeyDown={handleKeyDown}
             />
-            <button onClick={fetch}>Fetch</button>
+            <Button 
+                variant="contained" 
+                color="primary" 
+                onClick={fetch}
+            >
+                Fetch
+            </Button>
 
             { componenteDisplay }
 
